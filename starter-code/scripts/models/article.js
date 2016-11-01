@@ -70,8 +70,10 @@
       return article.body.split(' ').length;
     })
     // TODO: complete this reduce to get a grand total word count
-    .reduce(function() {
-    });
+    .reduce(function(acc, cur, idx, array) {
+      acc = acc + cur;
+      return acc;
+    }, 0);
   };
 
   /* Chain together a `map` and a `reduce` call to
