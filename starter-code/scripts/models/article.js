@@ -64,13 +64,15 @@
 
   /* Chain together a `map` and a `reduce` call to get a rough count of
     all words in all articles. */
+    // DONE
   Article.numWordsAll = function() {
     return Article.allArticles.map(function(article) {
     // NOTE: Grab the word count from each article body.
       return article.body.split(' ').length;
     })
     // TODO: complete this reduce to get a grand total word count
-    .reduce(function() {
+    .reduce(function(acc, next, idx, array) {
+      return acc + next;
     });
   };
 
@@ -79,10 +81,19 @@
   Article.allAuthors = function() {
   //return       TODO: map our collection
     //return    TODO: return just the author names
-
+    return Article.allArticles.map(function(article) {
+      return article.author;
+    })
   /* TODO: For our reduce that we'll chain here -- since we are trying to
       return an array, we'll need to specify an accumulator type (AKA initial value)
       What should this accumulator be and where is it placed? */
+      // DONE
+    .reduce(function(acc, cur, idx, array) {
+      if (acc.indexOf(cur) === -1) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
   };
 
   Article.numWordsByAuthor = function() {
