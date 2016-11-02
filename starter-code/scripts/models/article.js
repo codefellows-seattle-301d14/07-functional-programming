@@ -78,7 +78,7 @@
   /* Chain together a `map` and a `reduce` call to
           produce an array of *unique* author names. */
   Article.allAuthors = function() {
-    Article.allArticles.map(function(article){
+    return Article.allArticles.map(function(article){
       return article.author;
     })
     .reduce(function(acc, cur, idx, array){
@@ -101,17 +101,26 @@
       the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
       return {
-      /* TODO: complete these properties:
-      name:
-      numWords: someCollection.filter(function(curArticle) {
-       return a condition here to check for matching authors
-      })
-      .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
-      .reduce(...) // TODO: squash this array of numbers into one big number!
-      */
+        name: author,
+        numWords: Article.allArticles.filter(function(curArticle){
+          return curArticle.author === author; //this.name;
+        }).map(function(article){
+          return article.body.split(' ').length;
+        }).reduce(function(cur, next, idx, array) {
+          return cur + next;
+        })
       };
     });
   };
+
+  /* TODO: complete these properties:
+  name:
+  numWords: Article.allAuthors().filter(function(curArticle) {
+   return a condition here to check for matching authors
+  })
+  .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
+  .reduce(...) // TODO: squash this array of numbers into one big number!
+  */
 
   module.Article = Article;
 })(window);
