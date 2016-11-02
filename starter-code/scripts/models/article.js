@@ -87,12 +87,10 @@
       console.log('now here');
       return article.author;
     })
-    .reduce(function(acc, cur, index, array){
-      if (article.author.indexOf(acc) === index){
-        return article.author;
-      };
-    });
-
+    .reduce(function(author, cur){
+      if (author.indexOf(cur) === -1) author.push(cur);
+      return author;
+    },[]);
   };
 
   /* TODO: For our reduce that we'll chain here -- since we are trying to
@@ -106,6 +104,11 @@
       the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
       return {
+        name: author,
+      //   numWords: .filter(function(curArticle){
+      //     return curArticle.name;
+      //   })
+      // };
       /* TODO: complete these properties:
       name:
       numWords: someCollection.filter(function(curArticle) {
@@ -114,8 +117,8 @@
       .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
       .reduce(...) // TODO: squash this array of numbers into one big number!
       */
-      };
-    });
+    }
+    );
   };
 
   module.Article = Article;
