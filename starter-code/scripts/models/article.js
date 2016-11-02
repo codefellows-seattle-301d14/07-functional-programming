@@ -70,8 +70,9 @@
       return article.body.split(' ').length;
     })
     // TODO: complete this reduce to get a grand total word count
-    .reduce(function() {
-    });
+    .reduce(function(prev, next) {
+      return prev + next;
+    }, 0);
   };
 
   /* Chain together a `map` and a `reduce` call to
@@ -79,10 +80,19 @@
   Article.allAuthors = function() {
   //return       TODO: map our collection
     //return    TODO: return just the author names
+    return Article.allArticles.map(function (cur) {
+      return cur.author;
+    })
+    /* TODO: For our reduce that we'll chain here -- since we are trying to
+        return an array, we'll need to specify an accumulator type (AKA initial value)
+        What should this accumulator be and where is it placed? */
+    .reduce(function (acc, cur) {
+      if (acc.indexOf(cur) === -1) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
 
-  /* TODO: For our reduce that we'll chain here -- since we are trying to
-      return an array, we'll need to specify an accumulator type (AKA initial value)
-      What should this accumulator be and where is it placed? */
   };
 
   Article.numWordsByAuthor = function() {
