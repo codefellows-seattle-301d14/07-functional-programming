@@ -77,17 +77,17 @@
   };
 
   /* Chain together a `map` and a `reduce` call to
-          produce an array of *unique* author names. */
+  produce an array of *unique* author names. */
   Article.allAuthors = function() {
-  //return       TODO: map our collection
+    //return       TODO: map our collection
     //return    TODO: return just the author names
     return Article.allArticles.map(function(article) {
       return article.author;
     })
-  /* TODO: For our reduce that we'll chain here -- since we are trying to
-      return an array, we'll need to specify an accumulator type (AKA initial value)
-      What should this accumulator be and where is it placed? */
-      // DONE
+    /* TODO: For our reduce that we'll chain here -- since we are trying to
+    return an array, we'll need to specify an accumulator type (AKA initial value)
+    What should this accumulator be and where is it placed? */
+    // DONE
     .reduce(function(acc, cur, idx, array) {
       if (acc.indexOf(cur) === -1) {
         acc.push(cur);
@@ -97,22 +97,32 @@
   };
 
   Article.numWordsByAuthor = function() {
-  /*  Transform each author element into an object with 2 properties:
-      One for the author's name, and one for the total number of words across
-      the matching articles written by the specified author. */
+    /*  Transform each author element into an object with 2 properties:
+    One for the author's name, and one for the total number of words across
+    the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
       return {
-      /* TODO: complete these properties:
-      name:
-      numWords: someCollection.filter(function(curArticle) {
-       return a condition here to check for matching authors
+        /* TODO: complete these properties:
+        name:
+        numWords: someCollection.filter(function(curArticle) {
+        return a condition here to check for matching authors
       })
       .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
       .reduce(...) // TODO: squash this array of numbers into one big number!
       */
+      // DONE
+        name: author,
+        numWords: Article.allArticles.filter(function(curArticle) {
+          return curArticle.author === author;
+        })
+        .map(function(article) {
+          return article.body.split(' ').length;
+        })
+        .reduce(function(acc, next, idx, array) {
+          return acc + next;
+        })
       };
     });
   };
-
   module.Article = Article;
 })(window);
