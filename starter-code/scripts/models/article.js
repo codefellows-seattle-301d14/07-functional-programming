@@ -65,8 +65,8 @@
   /* Chain together a `map` and a `reduce` call to get a rough count of
     all words in all articles. */
     // DONE
-  Article.numWordsAll = function() {
-    return Article.allArticles.map(function(article) {
+  Article.numWords = function(articles) {
+    return articles.map(function(article) {
     // NOTE: Grab the word count from each article body.
       return article.body.split(' ').length;
     })
@@ -74,6 +74,10 @@
     .reduce(function(acc, next, idx, array) {
       return acc + next;
     });
+  };
+
+  Article.numWordsAll = function() {
+    return Article.numWords(Article.allArticles);
   };
 
   /* Chain together a `map` and a `reduce` call to
@@ -101,26 +105,12 @@
     One for the author's name, and one for the total number of words across
     the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
+      // TODO DONE
       return {
-        /* TODO: complete these properties:
-        name:
-        numWords: someCollection.filter(function(curArticle) {
-        return a condition here to check for matching authors
-      })
-      .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
-      .reduce(...) // TODO: squash this array of numbers into one big number!
-      */
-      // DONE
         name: author,
-        numWords: Article.allArticles.filter(function(curArticle) {
+        numWords: Article.numWords(Article.allArticles.filter(function(curArticle) {
           return curArticle.author === author;
-        })
-        .map(function(article) {
-          return article.body.split(' ').length;
-        })
-        .reduce(function(acc, next, idx, array) {
-          return acc + next;
-        })
+        }))
       };
     });
   };
