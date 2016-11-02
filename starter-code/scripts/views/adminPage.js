@@ -8,9 +8,9 @@ articleView.renderAdminPage = function() {
 
 
   //  TODO: uncomment when ready to test:
-  // Article.numWordsByAuthor().forEach(function(numWordsObj) {
-  //   $('.author-stats').append(statsRender(numWordsObj));
-  // });
+  Article.numWordsByAuthor().forEach(function(numWordsObj) {
+    $('.author-stats').append(statsRender(numWordsObj));
+  });
 
 
 };
