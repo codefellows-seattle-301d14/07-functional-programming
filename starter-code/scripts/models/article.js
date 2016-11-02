@@ -110,7 +110,18 @@
       .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
       .reduce(...) // TODO: squash this array of numbers into one big number!
       */
-      
+      // DONE
+        name: author,
+        numWords:
+      Article.allArticles.filter(function(curArt){
+        if (curArt.author === author){
+          return curArt;
+        }
+      }).map(function(article){
+        return article.body.split(' ').length;
+      }).reduce(function(prev, next) {
+        return prev + next;
+      })
       };
     });
   };
