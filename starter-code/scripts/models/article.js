@@ -114,6 +114,15 @@
       .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
       .reduce(...) // TODO: squash this array of numbers into one big number!
       */
+        name:author,
+        numWords:Article.allArticles.filter(function(article){
+          return article.author === author;
+        }).map(function(article){
+          return article.body.match(/\w+/g).length;
+        }).reduce(function(prev, cur){
+          return prev + cur;
+        })
+
       };
     });
   };
