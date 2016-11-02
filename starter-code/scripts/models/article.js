@@ -70,7 +70,10 @@
       return article.body.split(' ').length;
     })
     // TODO: complete this reduce to get a grand total word count
-    .reduce(function() {
+    // DONE //
+    .reduce(function(cur,next,idx,array) {
+      var sum = (cur + next);
+      return sum;
     });
   };
 
@@ -78,8 +81,15 @@
           produce an array of *unique* author names. */
   Article.allAuthors = function() {
   //return       TODO: map our collection
+    return Article.allArticles.map(function(article) {
+      return article.author;
+    }).reduce(function(acc, cur, idx, array){
+      if (acc.indexOf(cur) === -1) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
     //return    TODO: return just the author names
-
   /* TODO: For our reduce that we'll chain here -- since we are trying to
       return an array, we'll need to specify an accumulator type (AKA initial value)
       What should this accumulator be and where is it placed? */
@@ -91,6 +101,14 @@
       the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
       return {
+        name: author,
+        numWords: Article.allArticles.filter(function(curArticle) {
+          return curArticle.author === author;
+        }).map(function(article) {
+          return article.body.split(' ').length;
+        }).reduce(function(acc, next, idx, array) {
+          return acc + next;
+        })
       /* TODO: complete these properties:
       name:
       numWords: someCollection.filter(function(curArticle) {
