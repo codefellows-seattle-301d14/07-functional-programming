@@ -82,11 +82,13 @@
   Article.allAuthors = function() {
   //return       TODO: map our collection
     return Article.allArticles.map(function(article) {
-      return Article.author;
-      console.log(Article.author);
-    }).reduce(function(cur, next, idx, array){
-      return array.indexOf(cur) === idx;
-    });
+      return article.author;
+    }).reduce(function(acc, cur, idx, array){
+      if (acc.indexOf(cur) === -1) {
+        acc.push(cur);
+      }
+      return acc;
+    }, []);
     //return    TODO: return just the author names
   /* TODO: For our reduce that we'll chain here -- since we are trying to
       return an array, we'll need to specify an accumulator type (AKA initial value)

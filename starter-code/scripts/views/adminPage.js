@@ -6,9 +6,9 @@ articleView.renderAdminPage = function() {
   $('#blog-stats .words').text(Article.numWordsAll());
 
   //  TODO: uncomment when ready to test:
-  Article.numWordsByAuthor().forEach(function(numWordsObj) {
-    $('.author-stats').append(statsRender(numWordsObj));
-  });
+  // Article.numWordsByAuthor().forEach(function(numWordsObj) {
+  //   $('.author-stats').append(statsRender(numWordsObj));
+  // });
 
 
 };
