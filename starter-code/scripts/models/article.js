@@ -116,7 +116,7 @@
           }
 
         })
-        .map(function(cur, next){
+        .map(function(cur){
           return cur.body.split(' ').length;
         })
         .reduce(function(prev, cur){
