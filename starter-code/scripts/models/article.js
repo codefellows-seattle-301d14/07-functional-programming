@@ -101,6 +101,14 @@
       the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
       return {
+        name: author,
+        numWords: Article.allArticles.filter(function(curArticle) {
+          return curArticle.author === author;
+        }).map(function(article) {
+          return article.body.split(' ').length;
+        }).reduce(function(acc, next, idx, array) {
+          return acc + next;
+        })
       /* TODO: complete these properties:
       name:
       numWords: someCollection.filter(function(curArticle) {
