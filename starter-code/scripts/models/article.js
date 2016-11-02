@@ -80,14 +80,20 @@
           produce an array of *unique* author names. */
   Article.allAuthors = function() {
   //return       TODO:DONE map our collection
-  return Article.allArticles.map(function(article) {
     //return    TODO:DONE return just the author names
-    return article.author;
-    // console.log(article.author);
-  /* TODO: For our reduce that we'll chain here -- since we are trying to
+    return Article.allArticles.map(function(article) {
+      return article.author;
+      // console.log(article.author);
+    })
+    /* TODO: For our reduce that we'll chain here -- since we are trying to
       return an array, we'll need to specify an accumulator type (AKA initial value)
       What should this accumulator be and where is it placed? */
-    });
+      .reduce(function(acc,cur,idx,array) {
+        if(array.indexOf(cur) === idx) {
+          acc.push(cur);
+        };
+        return acc;
+      },[]);
   };
 
 
