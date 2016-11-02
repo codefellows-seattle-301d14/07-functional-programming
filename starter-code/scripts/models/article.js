@@ -72,9 +72,9 @@
     })
     // TODO: complete this reduce to get a grand total word count
     // DONE
-      .reduce(function(previous, next) {
+      .reduce(function(cur, next) {
       //sum up each one with reduce
-        return previous + next;
+        return cur + next;
       });
   };
 
@@ -90,7 +90,6 @@
       .reduce(function(acc, cur) {
         if (acc.indexOf(cur) === -1) {
           acc.push(cur);
-
         }
         return acc;
       }, []);
@@ -113,6 +112,18 @@
       .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
       .reduce(...) // TODO: squash this array of numbers into one big number!
       */
+        name: author,
+        numWords: Article.allArticles.filter(function(curArticle) {
+          if (curArticle.author === author) {
+            return curArticle;
+          }
+        })
+        .map(function(article) {
+          return article.body.split(' ').length;
+        })
+        .reduce(function(cur, next) {
+          return cur + next;
+        })
       };
     });
   };
