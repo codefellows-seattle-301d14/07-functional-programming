@@ -105,10 +105,16 @@
     return Article.allAuthors().map(function(author) {
       return {
         name: author,
-      //   numWords: .filter(function(curArticle){
-      //     return curArticle.name;
-      //   })
-      // };
+        numWords: Article.allArticles.filter(function(curArticle){
+          return curArticle.author === author;
+        })
+        .map(function(curArticle){
+          return curArticle.body.split(' ').length;
+        })
+        .reduce(function(acc, cur, index, array){
+          return acc + cur;
+        })
+      };
       /* TODO: complete these properties:
       name:
       numWords: someCollection.filter(function(curArticle) {
