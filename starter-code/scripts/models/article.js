@@ -70,19 +70,34 @@
       return article.body.split(' ').length;
     })
     // TODO: complete this reduce to get a grand total word count
-    .reduce(function() {
+    //DONE
+    .reduce(function(prev, current) {
+      return prev + current;
     });
   };
 
   /* Chain together a `map` and a `reduce` call to
           produce an array of *unique* author names. */
   Article.allAuthors = function() {
-  //return       TODO: map our collection
+    //return       TODO: map our collection
     //return    TODO: return just the author names
+    console.log('first part');
+    return Article.allArticles.map(function(article){
+      //regan here 6:05 tuesday november 1
+      console.log('second part');
+      return article.author;
+    })
+    //first part done
 
-  /* TODO: For our reduce that we'll chain here -- since we are trying to
-      return an array, we'll need to specify an accumulator type (AKA initial value)
-      What should this accumulator be and where is it placed? */
+    /* TODO: For our reduce that we'll chain here -- since we are trying to
+        return an array, we'll need to specify an accumulator type (AKA initial value)
+        What should this accumulator be and where is it placed? */
+
+        //DONE
+        .reduce(function(acc, cur){
+          if (acc.indexOf(cur) < 0 ) acc.push(cur);
+          return acc;
+        },[]);
   };
 
   Article.numWordsByAuthor = function() {
@@ -91,6 +106,12 @@
       the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
       return {
+        name: author,
+        //numWords: Article.allArticles.filter(function(curArticle) {
+          // console.log(curArticle.author);
+          // console.log(author);
+         //return curArticle.author === author;
+
       /* TODO: complete these properties:
       name:
       numWords: someCollection.filter(function(curArticle) {
@@ -99,6 +120,8 @@
       .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
       .reduce(...) // TODO: squash this array of numbers into one big number!
       */
+
+      //}
       };
     });
   };
