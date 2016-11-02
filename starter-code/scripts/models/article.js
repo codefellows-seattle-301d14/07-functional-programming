@@ -89,7 +89,7 @@
       return an array, we'll need to specify an accumulator type (AKA initial value)
       What should this accumulator be and where is it placed? */
       .reduce(function(acc,cur,idx,array) {
-        if(array.indexOf(cur) === idx) {
+        if(acc.indexOf(cur) === -1) {
           acc.push(cur);
         };
         return acc;
