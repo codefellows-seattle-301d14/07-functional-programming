@@ -70,15 +70,25 @@
       return article.body.split(' ').length;
     })
     // TODO: complete this reduce to get a grand total word count
-    .reduce(function() {
+    .reduce(function(cur, next, idx, array) {
+      return cur + next;
     });
   };
 
   /* Chain together a `map` and a `reduce` call to
           produce an array of *unique* author names. */
   Article.allAuthors = function() {
-  //return       TODO: map our collection
-    //return    TODO: return just the author names
+    return Article.allArticles.map(function(article){
+      return article.author;
+    })
+    .reduce(function(acc, cur, idx, array){
+      if(array.indexOf(cur) === idx){
+        acc.push(cur);
+      }
+      return acc;
+    },[]);
+  // TODO: map our collection DONE
+    //return    TODO: return just the author names DONE
 
   /* TODO: For our reduce that we'll chain here -- since we are trying to
       return an array, we'll need to specify an accumulator type (AKA initial value)
@@ -91,17 +101,26 @@
       the matching articles written by the specified author. */
     return Article.allAuthors().map(function(author) {
       return {
-      /* TODO: complete these properties:
-      name:
-      numWords: someCollection.filter(function(curArticle) {
-       return a condition here to check for matching authors
-      })
-      .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
-      .reduce(...) // TODO: squash this array of numbers into one big number!
-      */
+        name: author,
+        numWords: Article.allArticles.filter(function(curArticle){
+          return curArticle.author === author; //this.name;
+        }).map(function(article){
+          return article.body.split(' ').length;
+        }).reduce(function(cur, next, idx, array) {
+          return cur + next;
+        })
       };
     });
   };
+
+  /* TODO: complete these properties:
+  name:
+  numWords: Article.allAuthors().filter(function(curArticle) {
+   return a condition here to check for matching authors
+  })
+  .map(...) // TODO: use .map to return the author's word count for each article's body (hint: regexp!).
+  .reduce(...) // TODO: squash this array of numbers into one big number!
+  */
 
   module.Article = Article;
 })(window);
