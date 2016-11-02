@@ -3,15 +3,17 @@ articleView.renderAdminPage = function() {
   $('#blog-stats .articles').text(Article.allArticles.length);
 
   /* TODO: uncomment when complete:
-  $('#blog-stats .words').text(Article.numWordsAll());
   */
+  // DONE
+  $('#blog-stats .words').text(Article.numWordsAll());
 
   /* TODO: uncomment when ready to test:
+  */
+  // DONE
   Article.numWordsByAuthor().forEach(function(numWordsObj) {
     $('.author-stats').append(statsRender(numWordsObj));
   });
-  */
-  
+
 };
 
 Article.fetchAll(articleView.renderAdminPage);
